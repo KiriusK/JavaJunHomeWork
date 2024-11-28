@@ -3,7 +3,7 @@ package homework2;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class Main {
+public class Program {
     public static void main(String[] args) throws ClassNotFoundException {
         Class<?> clazz = Class.forName("java.lang.String");
         Method[] methods = clazz.getMethods();
