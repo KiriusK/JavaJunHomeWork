@@ -1,5 +1,7 @@
 package homework3;
 
+import models.Person;
+
 import java.io.*;
 
 public class Program {
