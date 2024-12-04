@@ -15,28 +15,26 @@ public class Program {
 
 
             System.out.println("Добавление объектов");
-
             saveInDb(sessionFactory);
 
             System.out.println("Чтение объектов");
             readFromDb(sessionFactory);
-            System.out.println("Удаление этого объекта");
 
-            deleteFromDb(sessionFactory);
+            System.out.println("Удаление объекта");
+            deleteFromDb(sessionFactory,5);
+
             System.out.println("Снова чтение");
-
             readFromDb(sessionFactory);
-            System.out.println("7 level");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    private static void deleteFromDb(SessionFactory sessionFactory) {
+    private static void deleteFromDb(SessionFactory sessionFactory, int id) {
         try (Session session = sessionFactory.openSession()) {
-            List<Person> personList = session.createQuery("FROM Person WHERE id=2", Person.class).getResultList();
-            personList.get(0).printInfo();
-            session.delete(personList.get(0));
+            session.getTransaction().begin();
+            session.createMutationQuery("DELETE FROM Person WHERE id=" + id).executeUpdate();
+            session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
